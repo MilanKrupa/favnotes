@@ -7,15 +7,15 @@ import Articles from 'views/Articles';
 
 const Root = () => {
   return (
-    <MainTemplate>
-      <BrowserRouter>
+    <BrowserRouter>
+      <MainTemplate>
         <Switch>
           <Route exact path="/" component={Notes} />
           <Route path="/twitts" component={Twitts} />
           <Route path="/articles" component={Articles} />
         </Switch>
-      </BrowserRouter>
-    </MainTemplate>
+      </MainTemplate>
+    </BrowserRouter>
   );
 };
 
