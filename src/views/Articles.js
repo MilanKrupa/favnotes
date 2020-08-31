@@ -1,9 +1,15 @@
 import React from 'react';
 import UserPageTemplate from 'templates/UserPageTemplate';
+import Card from 'components/molecules/Card/Card';
 
 const Notes = () => (
   <UserPageTemplate pageType="article">
-    <h1>articles</h1>
+    <Card cardType="article" />
+    <Card cardType="article" />
+    <Card cardType="article" />
+    <Card cardType="article" />
+    <Card cardType="article" />
+    <Card cardType="article" />
   </UserPageTemplate>
 );
 

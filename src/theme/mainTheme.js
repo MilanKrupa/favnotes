@@ -5,8 +5,10 @@ export const theme = {
   grey100: 'hsl(0, 0%, 96%)',
   grey200: 'hsl(0, 0%, 90%)',
   black: 'hsl(0, 0%, 0%)',
-  light: 300,
-  bold: 600,
+  fontWeight: {
+    light: 300,
+    bold: 600,
+  },
   fontSize: {
     xl: '4rem',
     l: '2.4rem',
