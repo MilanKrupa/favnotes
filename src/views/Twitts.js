@@ -1,16 +1,16 @@
 import React from 'react';
-import UserPageTemplate from 'templates/UserPageTemplate';
+import GridTemplate from 'templates/GridTemplate';
 import Card from 'components/molecules/Card/Card';
 
 const Notes = () => (
-  <UserPageTemplate pageType="twitter">
+  <GridTemplate pageType="twitter">
     <Card cardType="twitter" />
     <Card cardType="twitter" />
     <Card cardType="twitter" />
     <Card cardType="twitter" />
     <Card cardType="twitter" />
     <Card cardType="twitter" />
-  </UserPageTemplate>
+  </GridTemplate>
 );
 
 export default Notes;

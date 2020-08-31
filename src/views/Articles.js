@@ -1,16 +1,16 @@
 import React from 'react';
-import UserPageTemplate from 'templates/UserPageTemplate';
+import GridTemplate from 'templates/GridTemplate';
 import Card from 'components/molecules/Card/Card';
 
 const Notes = () => (
-  <UserPageTemplate pageType="article">
+  <GridTemplate pageType="article">
     <Card cardType="article" />
     <Card cardType="article" />
     <Card cardType="article" />
     <Card cardType="article" />
     <Card cardType="article" />
     <Card cardType="article" />
-  </UserPageTemplate>
+  </GridTemplate>
 );
 
 export default Notes;
