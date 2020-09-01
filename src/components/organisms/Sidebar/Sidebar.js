@@ -1,15 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
 import ButtonIcon from 'components/atoms/ButtonIcon/Buttonicon';
 import Pen from 'assets/icons/pen.svg';
 import Twitter from 'assets/icons/twitter.svg';
 import Bulb from 'assets/icons/bulb.svg';
 import Logout from 'assets/icons/logout.svg';
 import Logo from 'assets/icons/logo.svg';
+import { routes } from 'routes/routes';
 
 const StyledWrapper = styled.aside`
-  background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : theme.note)};
+  background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : theme.notes)};
   height: 100vh;
   width: 120px;
   position: fixed;
@@ -43,23 +45,29 @@ const LinksList = styled.ul`
   list-style: none;
 `;
 
-// eslint-disable-next-line react/prop-types
 const Sidebar = ({ pageType }) => (
   <StyledWrapper activeColor={pageType}>
     <StyledLogo to="/" />
     <LinksList>
       <li>
-        <ButtonIcon as={NavLink} activeclass="active" to="/notes" icon={Pen} exact />
+        <ButtonIcon as={NavLink} activeclass="active" to={routes.notes} icon={Pen} />
       </li>
       <li>
-        <ButtonIcon as={NavLink} to="/twitts" icon={Twitter} />
+        <ButtonIcon as={NavLink} to={routes.twitts} icon={Twitter} />
       </li>
       <li>
-        <ButtonIcon as={NavLink} to="/articles" icon={Bulb} />
+        <ButtonIcon as={NavLink} to={routes.articles} icon={Bulb} />
       </li>
     </LinksList>
-    <StyledButtonIcon as={NavLink} to="/login" icon={Logout} />
+    <StyledButtonIcon as={NavLink} to={routes.login} icon={Logout} />
   </StyledWrapper>
 );
+
+Sidebar.propTypes = {
+  pageType: PropTypes.oneOf(['notes', 'twitts', 'articles']),
+};
+Sidebar.defaultProps = {
+  pageType: 'notes',
+};
 
 export default Sidebar;

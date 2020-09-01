@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 import UserPageTemplate from 'templates/UserPageTemplate';
 
-const DetailsTemplate = () => (
-  <UserPageTemplate>
+const DetailsTemplate = ({ pageType }) => (
+  <UserPageTemplate pageType={pageType}>
     <h1>note</h1>
     <p>
       Loremm ipsum dolor sit amet consectetur adipisicing elit. Nobis iste assumenda quos error
@@ -15,5 +15,13 @@ const DetailsTemplate = () => (
     <Link to="/">go back</Link>
   </UserPageTemplate>
 );
+
+DetailsTemplate.propTypes = {
+  pageType: PropTypes.oneOf(['notes', 'twitts', 'articles']),
+};
+
+DetailsTemplate.defaultProps = {
+  pageType: 'notes',
+};
 
 export default DetailsTemplate;
