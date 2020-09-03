@@ -4,7 +4,7 @@ import Card from 'components/molecules/Card/Card';
 
 const Notes = () => (
   <GridTemplate pageType="twitts">
-    <Card cardType="twitts" />
+    <Card cardType="twitts" twitterName="erveoll" />
     <Card cardType="twitts" />
     <Card cardType="twitts" />
     <Card cardType="twitts" />

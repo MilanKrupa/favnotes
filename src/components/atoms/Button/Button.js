@@ -7,7 +7,7 @@ const Button = styled.button`
   border: none;
   border-radius: 50px;
   font-size: 16px;
-  font-weight: semibold;
+  font-weight: ${({ theme, bold }) => (bold ? theme.fontWeight.bold : 'semibold')};
   font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   color: black;
