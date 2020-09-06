@@ -29,11 +29,8 @@ const initialState = {
   ],
 };
 
+// eslint-disable-next-line no-unused-vars
 const rootReducer = (state = initialState, action) => {
-  // ! change it later
-
-  if (action) return null;
-
   return state;
 };
 
