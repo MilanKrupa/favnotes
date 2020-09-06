@@ -2,7 +2,10 @@
   "extends": ["airbnb", "prettier", "prettier/react"],
   "parser": "babel-eslint",
   "env": { "jest": true },
-  "globals": { "document": true },
+  "globals": {
+    "document": true,
+    "window": true
+  },
   "rules": {
     "react/state-in-constructor": 0,
     "import/prefer-default-export": 0,
