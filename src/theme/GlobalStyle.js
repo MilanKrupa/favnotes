@@ -13,6 +13,7 @@ html{
 }
 
 body{
+    margin: 0;
     padding-left: 120px;
     font-size: 1.6rem;
     font-family: 'Montserrat', sans-serif;

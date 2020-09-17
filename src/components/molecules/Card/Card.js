@@ -140,4 +140,4 @@ const mapDispatchToProps = (dispatch) => ({
   removeItem: (itemType, id) => dispatch(removeCard(itemType, id)),
 });
 
-export default withContext(connect(null, mapDispatchToProps)(Card));
+export default connect(null, mapDispatchToProps)(withContext(Card));

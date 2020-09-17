@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
-import ButtonIcon from 'components/atoms/ButtonIcon/Buttonicon';
+import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
 import Pen from 'assets/icons/pen.svg';
 import Twitter from 'assets/icons/twitter.svg';
 import Bulb from 'assets/icons/bulb.svg';
