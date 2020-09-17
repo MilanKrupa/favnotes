@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import UserPageTemplate from 'templates/UserPageTemplate';
+import withContext from 'hoc/withContext';
 
-const DetailsTemplate = ({ children, pageType }) => (
-  <UserPageTemplate pageType={pageType}>{children}</UserPageTemplate>
+const DetailsTemplate = ({ children, pageContext }) => (
+  <UserPageTemplate pageContext={pageContext}>{children}</UserPageTemplate>
 );
 
 DetailsTemplate.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.array]).isRequired,
-  pageType: PropTypes.oneOf(['notes', 'twitts', 'articles']),
+  pageContext: PropTypes.oneOf(['notes', 'twitts', 'articles']),
 };
 
 DetailsTemplate.defaultProps = {
-  pageType: 'notes',
+  pageContext: 'notes',
 };
 
-export default DetailsTemplate;
+export default withContext(DetailsTemplate);

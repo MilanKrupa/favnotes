@@ -26,16 +26,16 @@ const StyledHeading = styled(Heading)`
   text-transform: capitalize;
 `;
 
-const GridTemplate = ({ children, pageType }) => (
+const GridTemplate = ({ children, pageContext }) => (
   <>
-    <UserPageTemplate pageType={pageType}>
+    <UserPageTemplate>
       <StyledWrapper>
         <StyledPageHeader>
           <Input search placeholder="search" />
           <StyledHeading big as="h1">
-            {pageType}
+            {pageContext}
           </StyledHeading>
-          <Paragraph>6 {pageType}</Paragraph>
+          <Paragraph>6 {pageContext}</Paragraph>
         </StyledPageHeader>
         <StyledGrid>{children}</StyledGrid>
       </StyledWrapper>
@@ -45,11 +45,11 @@ const GridTemplate = ({ children, pageType }) => (
 
 GridTemplate.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.array]).isRequired,
-  pageType: PropTypes.oneOf(['notes', 'twitts', 'articles']),
+  pageContext: PropTypes.oneOf(['notes', 'twitts', 'articles']),
 };
 
 GridTemplate.defaultProps = {
-  pageType: 'notes',
+  pageContext: 'notes',
 };
 
 export default withContext(GridTemplate);

@@ -9,6 +9,7 @@ import Bulb from 'assets/icons/bulb.svg';
 import Logout from 'assets/icons/logout.svg';
 import Logo from 'assets/icons/logo.svg';
 import { routes } from 'routes/routes';
+import withContext from 'hoc/withContext';
 
 const StyledWrapper = styled.aside`
   background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : theme.notes)};
@@ -45,8 +46,8 @@ const LinksList = styled.ul`
   list-style: none;
 `;
 
-const Sidebar = ({ pageType }) => (
-  <StyledWrapper activeColor={pageType}>
+const Sidebar = ({ pageContext }) => (
+  <StyledWrapper activeColor={pageContext}>
     <StyledLogo to="/" />
     <LinksList>
       <li>
@@ -64,10 +65,10 @@ const Sidebar = ({ pageType }) => (
 );
 
 Sidebar.propTypes = {
-  pageType: PropTypes.oneOf(['notes', 'twitts', 'articles']),
+  pageContext: PropTypes.oneOf(['notes', 'twitts', 'articles']),
 };
 Sidebar.defaultProps = {
-  pageType: 'notes',
+  pageContext: 'notes',
 };
 
-export default Sidebar;
+export default withContext(Sidebar);
