@@ -12,7 +12,7 @@ const initialState = {
     {
       id: 0,
       title: 'My best twitt',
-      twitterName: 'milan_krupa',
+      twittName: 'milan_krupa',
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque assumenda beatae asperiores non dolorum repellat unde facere, sit aperiam, qui quasi deserunt provident veritatis. Laborum, quas repellendus! Reprehenderit, aut maiores?',
       created: '6 hours ago',
@@ -38,6 +38,11 @@ const rootReducer = (state = initialState, action) => {
         [action.payload.itemType]: [
           ...state[action.payload.itemType].filter((item) => item.id !== action.payload.id),
         ],
+      };
+    case 'ADD_ITEM':
+      return {
+        ...state,
+        [action.payload.itemType]: [...state[action.payload.itemType], action.payload.item],
       };
     default:
       return state;

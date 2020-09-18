@@ -6,12 +6,12 @@ import Card from 'components/molecules/Card/Card';
 
 const Twitts = ({ twitts }) => (
   <GridTemplate pageType="twitts">
-    {twitts.map(({ title, content, twitterName, created, id }) => (
+    {twitts.map(({ title, content, twittName, created, id }) => (
       <Card
         cardType="twitts"
         title={title}
         content={content}
-        twitterName={twitterName}
+        twittName={twittName}
         created={created}
         id={id}
         key={id}
@@ -23,10 +23,10 @@ const Twitts = ({ twitts }) => (
 Twitts.propTypes = {
   twitts: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
-      twitterName: PropTypes.string.isRequired,
+      twittName: PropTypes.string.isRequired,
       created: PropTypes.string.isRequired,
     }),
   ),

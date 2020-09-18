@@ -7,7 +7,7 @@ import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Button from 'components/atoms/Button/Button';
 import LinkIcon from 'assets/icons/link.svg';
 import { connect } from 'react-redux';
-import { removeCard } from 'actions';
+import { removeItem as removeItemAction } from 'actions';
 import withContext from 'hoc/withContext';
 
 const StyledWrapper = styled.div`
@@ -27,7 +27,7 @@ const InnerWrapper = styled.div`
   background-color: ${({ pageContext, theme }) => (pageContext ? theme[pageContext] : 'white')};
   padding: 17px 30px;
   :first-of-type {
-    z-index: 9999;
+    z-index: 98;
   }
 
   ${({ flex }) =>
@@ -86,7 +86,7 @@ class Card extends Component {
       pageContext,
       title,
       created,
-      twitterName,
+      twittName,
       articleUrl,
       content,
       removeItem,
@@ -102,7 +102,7 @@ class Card extends Component {
           <StyledHeading>{title}</StyledHeading>
           <DateInfo>{created}</DateInfo>
           {pageContext === 'twitts' && (
-            <StyledAvatar src={`https://twitter-avatar.now.sh/${twitterName}`} />
+            <StyledAvatar src={`https://twitter-avatar.now.sh/${twittName}`} />
           )}
           {pageContext === 'articles' && <StyledLinkButton href={articleUrl} />}
         </InnerWrapper>
@@ -126,21 +126,21 @@ Card.propTypes = {
   pageContext: PropTypes.oneOf(['notes', 'twitts', 'articles']),
   title: PropTypes.string.isRequired,
   created: PropTypes.string.isRequired,
-  twitterName: PropTypes.string,
+  twittName: PropTypes.string,
   articleUrl: PropTypes.string,
   content: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   removeItem: PropTypes.func.isRequired,
 };
 
 Card.defaultProps = {
   pageContext: 'notes',
-  twitterName: null,
+  twittName: null,
   articleUrl: null,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  removeItem: (itemType, id) => dispatch(removeCard(itemType, id)),
+  removeItem: (itemType, id) => dispatch(removeItemAction(itemType, id)),
 });
 
 export default connect(null, mapDispatchToProps)(withContext(Card));
