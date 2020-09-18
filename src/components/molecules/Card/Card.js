@@ -17,6 +17,9 @@ const StyledWrapper = styled.div`
   overflow: hidden;
   display: grid;
   grid-template-rows: 0.25fr 1fr;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const InnerWrapper = styled.div`
@@ -94,8 +97,8 @@ class Card extends Component {
       return <Redirect to={`${pageContext}/${id}`} />;
     }
     return (
-      <StyledWrapper id={id}>
-        <InnerWrapper pageContext={pageContext} onClick={this.handleCardClick}>
+      <StyledWrapper id={id} onClick={this.handleCardClick}>
+        <InnerWrapper pageContext={pageContext}>
           <StyledHeading>{title}</StyledHeading>
           <DateInfo>{created}</DateInfo>
           {pageContext === 'twitts' && (

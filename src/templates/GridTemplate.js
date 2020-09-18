@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import UserPageTemplate from 'templates/UserPageTemplate';
@@ -13,6 +13,8 @@ import withContext from 'hoc/withContext';
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
   position: relative;
+  min-height: 100vh;
+  overflow: hidden;
 `;
 
 const StyledGrid = styled.div`
@@ -38,26 +40,48 @@ const StyledButtonIcon = styled(ButtonIcon)`
   background-size: 50%;
   border-radius: 50px;
   z-index: 100;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
-const GridTemplate = ({ children, pageContext }) => (
-  <>
-    <UserPageTemplate>
-      <StyledWrapper>
-        <StyledPageHeader>
-          <Input search placeholder="search" />
-          <StyledHeading big as="h1">
-            {pageContext}
-          </StyledHeading>
-          <Paragraph>6 {pageContext}</Paragraph>
-        </StyledPageHeader>
-        <StyledGrid>{children}</StyledGrid>
-        <StyledButtonIcon icon={plusIcon} activecolor={pageContext} />
-        <NewItemBar pageContext={pageContext} />
-      </StyledWrapper>
-    </UserPageTemplate>
-  </>
-);
+class GridTemplate extends Component {
+  state = {
+    isNewItemBarVisible: false,
+  };
+
+  handleNewItemBarToggle = () => {
+    this.setState((prevState) => ({ isNewItemBarVisible: !prevState.isNewItemBarVisible }));
+  };
+
+  render() {
+    const { pageContext, children } = this.props;
+    const { isNewItemBarVisible } = this.state;
+
+    return (
+      <>
+        <UserPageTemplate>
+          <StyledWrapper>
+            <StyledPageHeader>
+              <Input search placeholder="search" />
+              <StyledHeading big as="h1">
+                {pageContext}
+              </StyledHeading>
+              <Paragraph>6 {pageContext}</Paragraph>
+            </StyledPageHeader>
+            <StyledGrid>{children}</StyledGrid>
+            <StyledButtonIcon
+              onClick={this.handleNewItemBarToggle}
+              icon={plusIcon}
+              activecolor={pageContext}
+            />
+            <NewItemBar pageContext={pageContext} isVisible={isNewItemBarVisible} />
+          </StyledWrapper>
+        </UserPageTemplate>
+      </>
+    );
+  }
+}
 
 GridTemplate.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.array]).isRequired,

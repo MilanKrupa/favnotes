@@ -11,6 +11,10 @@ const Button = styled.button`
   font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   color: black;
+  outline: none;
+  :hover {
+    cursor: pointer;
+  }
 
   ${({ secondary }) =>
     secondary &&

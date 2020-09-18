@@ -10,6 +10,7 @@ const ButtonIcon = styled.button`
   background-position: 50% 50%;
   background-size: 65%;
   border: none;
+  outline: none;
   background-color: transparent;
 
   &.active {
