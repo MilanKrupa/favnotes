@@ -5,6 +5,7 @@ export const theme = {
   grey100: 'hsl(0, 0%, 96%)',
   grey200: 'hsl(0, 0%, 90%)',
   black: 'hsl(0, 0%, 0%)',
+  orange: 'hsl(20, 86%, 59%)',
   fontWeight: {
     light: 300,
     bold: 600,

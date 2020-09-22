@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addItem as addItemAction } from 'actions';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 const StyledWrapper = styled.div`
   position: absolute;
@@ -19,7 +19,7 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
-  padding: 100px 90px;
+  padding: 80px 90px;
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
   transform: translateX(${({ isVisible }) => (isVisible ? '0' : '100%')});
   transition: transform 0.3s ease-in-out;
@@ -37,9 +37,50 @@ const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
 `;
+const StyledErrorMessage = styled.div`
+  padding: 15px 0 0 30px;
+  color: ${({ theme }) => theme.orange};
+  font-weight: ${({ theme }) => theme.fontWeight.bold};
+  font-size: ${({ theme }) => theme.fontSize.xs};
+`;
 
 const NewItemBar = (props) => {
-  const { pageContext, isVisible, addItem } = props;
+  const { pageContext, isVisible, addItem, handleClose } = props;
+  const handleSubmit = (values, { setSubmitting, resetForm }) => {
+    handleClose();
+    addItem(pageContext, values);
+    resetForm({ values: '' });
+    setSubmitting(false);
+  };
+
+  function validateTitle(value) {
+    let error;
+    if (!value) {
+      error = 'Required';
+    } else if (value.length < 3) {
+      error = 'At least 3 characters';
+    }
+    return error;
+  }
+  function validateTwitt(value) {
+    let error;
+    if (!value) {
+      error = 'Required';
+    } else if (!/^[a-zA-Z0-9_]{1,15}$/.test(value)) {
+      error = 'Invalid twitter account';
+    }
+
+    return error;
+  }
+  function validateUrl(value) {
+    let error;
+    if (!value) {
+      error = 'Required. You can use notes instead';
+    } else if (!/^(ftp|http|https):\/\/[^ "]+$/.test(value)) {
+      error = 'Invalid URL';
+    }
+    return error;
+  }
   return (
     <StyledWrapper activecolor={pageContext} isVisible={isVisible}>
       <Heading big as="h1">
@@ -47,25 +88,48 @@ const NewItemBar = (props) => {
       </Heading>
       <Formik
         initialValues={{ title: '', content: '', twittName: '', articleUrl: '' }}
-        onSubmit={(values, { setSubmitting }) => {
-          addItem(pageContext, values);
-          setSubmitting(false);
-        }}
+        onSubmit={handleSubmit}
       >
         {({ isSubmitting, handleChange, handleBlur, values }) => (
           <StyledForm>
-            <StyledInput as={Field} type="text" name="title" placeholder="title" />
+            <StyledInput
+              as={Field}
+              type="text"
+              name="title"
+              placeholder="title"
+              autoComplete="off"
+              validate={validateTitle}
+            />
+
+            <ErrorMessage name="title">
+              {(msg) => <StyledErrorMessage>{msg}</StyledErrorMessage>}
+            </ErrorMessage>
             {pageContext === 'twitts' && (
               <StyledInput
                 as={Field}
                 type="text"
                 name="twittName"
+                autoComplete="off"
                 placeholder="Account name eg. milan_krupa"
+                validate={validateTwitt}
               />
             )}
+            <ErrorMessage name="twittName">
+              {(msg) => <StyledErrorMessage>{msg}</StyledErrorMessage>}
+            </ErrorMessage>
             {pageContext === 'articles' && (
-              <StyledInput placeholder="link" as={Field} type="text" name="articleUrl" />
+              <StyledInput
+                placeholder="link"
+                as={Field}
+                type="text"
+                autoComplete="off"
+                name="articleUrl"
+                validate={validateUrl}
+              />
             )}
+            <ErrorMessage name="articleUrl">
+              {(msg) => <StyledErrorMessage>{msg}</StyledErrorMessage>}
+            </ErrorMessage>
             <StyledTextArea
               as="textarea"
               onChange={handleChange}
@@ -88,6 +152,7 @@ NewItemBar.propTypes = {
   pageContext: PropTypes.oneOf(['notes', 'twitts', 'articles']),
   isVisible: PropTypes.bool.isRequired,
   addItem: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired,
 };
 
 NewItemBar.defaultProps = {
