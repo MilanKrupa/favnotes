@@ -2,6 +2,7 @@ import React from 'react';
 import Input from 'components/atoms/Input/Input';
 import Button from 'components/atoms/Button/Button';
 import Heading from 'components/atoms/Heading/Heading';
+import ErrorInline from 'components/atoms/ErrorInline/ErrorInline';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -36,12 +37,6 @@ const StyledInput = styled(Input)`
 const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
-`;
-const StyledErrorMessage = styled.div`
-  padding: 15px 0 0 30px;
-  color: ${({ theme }) => theme.orange};
-  font-weight: ${({ theme }) => theme.fontWeight.bold};
-  font-size: ${({ theme }) => theme.fontSize.xs};
 `;
 
 const NewItemBar = (props) => {
@@ -101,9 +96,7 @@ const NewItemBar = (props) => {
               validate={validateTitle}
             />
 
-            <ErrorMessage name="title">
-              {(msg) => <StyledErrorMessage>{msg}</StyledErrorMessage>}
-            </ErrorMessage>
+            <ErrorMessage name="title">{(msg) => <ErrorInline>{msg}</ErrorInline>}</ErrorMessage>
             {pageContext === 'twitts' && (
               <StyledInput
                 as={Field}
@@ -115,7 +108,7 @@ const NewItemBar = (props) => {
               />
             )}
             <ErrorMessage name="twittName">
-              {(msg) => <StyledErrorMessage>{msg}</StyledErrorMessage>}
+              {(msg) => <ErrorInline>{msg}</ErrorInline>}
             </ErrorMessage>
             {pageContext === 'articles' && (
               <StyledInput
@@ -128,7 +121,7 @@ const NewItemBar = (props) => {
               />
             )}
             <ErrorMessage name="articleUrl">
-              {(msg) => <StyledErrorMessage>{msg}</StyledErrorMessage>}
+              {(msg) => <ErrorInline>{msg}</ErrorInline>}
             </ErrorMessage>
             <StyledTextArea
               as="textarea"

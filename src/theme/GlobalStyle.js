@@ -14,7 +14,7 @@ html{
 
 body{
     margin: 0;
-    padding-left: 120px;
+    padding: 0;
     font-size: 1.6rem;
     font-family: 'Montserrat', sans-serif;
 }
