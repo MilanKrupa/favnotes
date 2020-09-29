@@ -33,7 +33,7 @@ const StyledAuthCard = styled.div`
 
 const AuthTemplate = ({ children }) => (
   <StyledWrapper>
-    <StyledLogo src={logoImg} alt="" />
+    <StyledLogo src={logoImg} alt="favnotes logo" />
     <Heading>Your new favorite online notes experience</Heading>
     <StyledAuthCard>{children}</StyledAuthCard>
   </StyledWrapper>

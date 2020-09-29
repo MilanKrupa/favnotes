@@ -7,4 +7,5 @@ export const routes = {
   twitts: '/twitts',
   twitt: '/twitts/:id',
   login: '/login',
+  register: '/register',
 };
