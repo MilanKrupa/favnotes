@@ -21,7 +21,7 @@ const StyledLogo = styled.img`
 
 const StyledAuthCard = styled.div`
   width: 400px;
-  height: 400px;
+  height: 500px;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
