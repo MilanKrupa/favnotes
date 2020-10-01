@@ -1,6 +1,5 @@
-import { REMOVE_ITEM, ADD_ITEM } from 'actions';
+import { REMOVE_ITEM, ADD_ITEM, AUTHENTICATE_SUCCESS } from 'actions';
 // import {AUTHENTICATE_REQUEST} from 'actions';
-// import {AUTHENTICATE_SUCCESS} from 'actions';
 // import {AUTHENTICATE_FAILURE} from 'actions';
 
 const initialState = {
@@ -37,6 +36,12 @@ const initialState = {
 // eslint-disable-next-line no-unused-vars
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case AUTHENTICATE_SUCCESS:
+      return {
+        ...state,
+        // eslint-disable-next-line no-underscore-dangle
+        userID: action.payload.data._id,
+      };
     case REMOVE_ITEM:
       return {
         ...state,

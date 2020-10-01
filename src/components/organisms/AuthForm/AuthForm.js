@@ -37,7 +37,7 @@ const StyledButton = styled(Button)`
   margin-top: 30px;
 `;
 
-const AuthForm = ({ authenticate }) => {
+const AuthForm = ({ userID, authenticate }) => {
   const { pathname } = window.location;
   const { register, login } = routes;
   function validateLogin(value) {
@@ -53,8 +53,8 @@ const AuthForm = ({ authenticate }) => {
     let error;
     if (!value) {
       error = 'Required';
-    } else if (!/^(?=.*[\d])(?=.*[!@#$%^&*])[\w!@#$%^&*]{6,16}$/.test(value)) {
-      error = 'At least 6 characters, one number and one special character required';
+    } else if (!/^(?=.*\d)(?=.*[a-z])[0-9a-zA-Z]{8,16}$/.test(value)) {
+      error = 'Password should contain 8-16 characters, one number is required';
     }
     return error;
   }
@@ -65,6 +65,7 @@ const AuthForm = ({ authenticate }) => {
     >
       {() => (
         <StyledForm>
+          <Heading>{userID}</Heading>
           <Heading>{pathname === login ? 'Sign in' : 'Sign up'}</Heading>
           <StyledInput
             as={Field}
@@ -83,7 +84,7 @@ const AuthForm = ({ authenticate }) => {
             validate={validatePassword}
           />
           <ErrorMessage name="password">{(msg) => <ErrorInline>{msg}</ErrorInline>}</ErrorMessage>
-          <StyledButton type="submit">Zaloguj</StyledButton>
+          <StyledButton type="submit">{pathname === login ? 'Log in' : 'Register'}</StyledButton>
           <StyledLink as={NavLink} to={pathname === login ? register : login}>
             {pathname === login ? 'Let me register' : 'Let me log in'}
           </StyledLink>
@@ -95,10 +96,19 @@ const AuthForm = ({ authenticate }) => {
 
 AuthForm.propTypes = {
   authenticate: PropTypes.func.isRequired,
+  userID: PropTypes.string,
 };
+
+AuthForm.defaultProps = {
+  userID: null,
+};
+
+const mapStateToProps = ({ userID = null }) => ({
+  userID,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   authenticate: (username, password) => dispatch(authenticateAction(username, password)),
 });
 
-export default connect(null, mapDispatchToProps)(WithContext(AuthForm));
+export default connect(mapStateToProps, mapDispatchToProps)(WithContext(AuthForm));
