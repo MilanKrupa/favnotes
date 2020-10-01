@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { routes } from 'routes/routes';
 import { NavLink } from 'react-router-dom';
@@ -8,6 +9,8 @@ import Input from 'components/atoms/Input/Input';
 import Button from 'components/atoms/Button/Button';
 import Heading from 'components/atoms/Heading/Heading';
 import WithContext from 'hoc/withContext';
+import { connect } from 'react-redux';
+import { authenticate as authenticateAction } from 'actions';
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -34,7 +37,7 @@ const StyledButton = styled(Button)`
   margin-top: 30px;
 `;
 
-const AuthForm = () => {
+const AuthForm = ({ authenticate }) => {
   const { pathname } = window.location;
   const { register, login } = routes;
   function validateLogin(value) {
@@ -56,7 +59,10 @@ const AuthForm = () => {
     return error;
   }
   return (
-    <Formik initialValues={{ username: '', password: '' }} onSubmit={() => null}>
+    <Formik
+      initialValues={{ username: '', password: '' }}
+      onSubmit={(username, password) => authenticate(username, password)}
+    >
       {() => (
         <StyledForm>
           <Heading>{pathname === login ? 'Sign in' : 'Sign up'}</Heading>
@@ -65,7 +71,7 @@ const AuthForm = () => {
             name="username"
             type="text"
             placeholder="login"
-            autocomplete="off"
+            autoComplete="off"
             validate={validateLogin}
           />
           <ErrorMessage name="username">{(msg) => <ErrorInline>{msg}</ErrorInline>}</ErrorMessage>
@@ -87,4 +93,12 @@ const AuthForm = () => {
   );
 };
 
-export default WithContext(AuthForm);
+AuthForm.propTypes = {
+  authenticate: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  authenticate: (username, password) => dispatch(authenticateAction(username, password)),
+});
+
+export default connect(null, mapDispatchToProps)(WithContext(AuthForm));

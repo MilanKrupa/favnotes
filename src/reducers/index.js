@@ -1,3 +1,8 @@
+import { REMOVE_ITEM, ADD_ITEM } from 'actions';
+// import {AUTHENTICATE_REQUEST} from 'actions';
+// import {AUTHENTICATE_SUCCESS} from 'actions';
+// import {AUTHENTICATE_FAILURE} from 'actions';
+
 const initialState = {
   notes: [
     {
@@ -32,14 +37,14 @@ const initialState = {
 // eslint-disable-next-line no-unused-vars
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'REMOVE_ITEM':
+    case REMOVE_ITEM:
       return {
         ...state,
         [action.payload.itemType]: [
           ...state[action.payload.itemType].filter((item) => item.id !== action.payload.id),
         ],
       };
-    case 'ADD_ITEM':
+    case ADD_ITEM:
       return {
         ...state,
         [action.payload.itemType]: [...state[action.payload.itemType], action.payload.item],
