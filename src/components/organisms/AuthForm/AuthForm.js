@@ -61,7 +61,7 @@ const AuthForm = ({ userID, authenticate }) => {
   return (
     <Formik
       initialValues={{ username: '', password: '' }}
-      onSubmit={(username, password) => authenticate(username, password)}
+      onSubmit={({ username, password }) => authenticate(username, password)}
     >
       {() => (
         <StyledForm>
