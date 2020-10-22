@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { routes } from 'routes/routes';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import ErrorInline from 'components/atoms/ErrorInline/ErrorInline';
 import Input from 'components/atoms/Input/Input';
@@ -63,33 +63,37 @@ const AuthForm = ({ userID, authenticate }) => {
       initialValues={{ username: '', password: '' }}
       onSubmit={({ username, password }) => authenticate(username, password)}
     >
-      {() => (
-        <StyledForm>
-          <Heading>{userID}</Heading>
-          <Heading>{pathname === login ? 'Sign in' : 'Sign up'}</Heading>
-          <StyledInput
-            as={Field}
-            name="username"
-            type="text"
-            placeholder="login"
-            autoComplete="off"
-            validate={validateLogin}
-          />
-          <ErrorMessage name="username">{(msg) => <ErrorInline>{msg}</ErrorInline>}</ErrorMessage>
-          <StyledInput
-            as={Field}
-            name="password"
-            type="password"
-            placeholder="password"
-            validate={validatePassword}
-          />
-          <ErrorMessage name="password">{(msg) => <ErrorInline>{msg}</ErrorInline>}</ErrorMessage>
-          <StyledButton type="submit">{pathname === login ? 'Log in' : 'Register'}</StyledButton>
-          <StyledLink as={NavLink} to={pathname === login ? register : login}>
-            {pathname === login ? 'Let me register' : 'Let me log in'}
-          </StyledLink>
-        </StyledForm>
-      )}
+      {() => {
+        if (userID) {
+          return <Redirect to={routes.home} />;
+        }
+        return (
+          <StyledForm>
+            <Heading>{pathname === login ? 'Sign in' : 'Sign up'}</Heading>
+            <StyledInput
+              as={Field}
+              name="username"
+              type="text"
+              placeholder="login"
+              autoComplete="off"
+              validate={validateLogin}
+            />
+            <ErrorMessage name="username">{(msg) => <ErrorInline>{msg}</ErrorInline>}</ErrorMessage>
+            <StyledInput
+              as={Field}
+              name="password"
+              type="password"
+              placeholder="password"
+              validate={validatePassword}
+            />
+            <ErrorMessage name="password">{(msg) => <ErrorInline>{msg}</ErrorInline>}</ErrorMessage>
+            <StyledButton type="submit">{pathname === login ? 'Log in' : 'Register'}</StyledButton>
+            <StyledLink as={NavLink} to={pathname === login ? register : login}>
+              {pathname === login ? 'Let me register' : 'Let me log in'}
+            </StyledLink>
+          </StyledForm>
+        );
+      }}
     </Formik>
   );
 };
