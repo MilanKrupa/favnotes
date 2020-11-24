@@ -39,12 +39,6 @@ const InnerWrapper = styled.div`
     `}
 `;
 
-const DateInfo = styled(Paragraph)`
-  font-weight: ${({ theme }) => theme.bold};
-  font-size: ${({ theme }) => theme.fontSize.xs};
-  margin: 0 0 10px;
-`;
-
 const StyledHeading = styled(Heading)`
   margin: 10px 0 0 0;
 `;
@@ -81,16 +75,7 @@ class Card extends Component {
   handleCardClick = () => this.setState({ redirect: true });
 
   render() {
-    const {
-      id,
-      pageContext,
-      title,
-      created,
-      twittName,
-      articleUrl,
-      content,
-      removeItem,
-    } = this.props;
+    const { id, pageContext, title, twittName, articleUrl, content, removeItem } = this.props;
     const { redirect } = this.state;
 
     if (redirect) {
@@ -100,7 +85,6 @@ class Card extends Component {
       <StyledWrapper id={id} onClick={this.handleCardClick}>
         <InnerWrapper pageContext={pageContext}>
           <StyledHeading>{title}</StyledHeading>
-          <DateInfo>{created}</DateInfo>
           {pageContext === 'twitts' && (
             <StyledAvatar src={`https://twitter-avatar.now.sh/${twittName}`} />
           )}
@@ -125,7 +109,6 @@ class Card extends Component {
 Card.propTypes = {
   pageContext: PropTypes.oneOf(['notes', 'twitts', 'articles']),
   title: PropTypes.string.isRequired,
-  created: PropTypes.string.isRequired,
   twittName: PropTypes.string,
   articleUrl: PropTypes.string,
   content: PropTypes.string.isRequired,

@@ -15,16 +15,8 @@ class Twitts extends Component {
     const { twitts } = this.props;
     return (
       <GridTemplate pageType="twitts">
-        {twitts.map(({ title, content, twittName, created, id }) => (
-          <Card
-            cardType="twitts"
-            title={title}
-            content={content}
-            twittName={twittName}
-            created={created}
-            id={id}
-            key={id}
-          />
+        {twitts.map(({ title, content, twittName, _id: id }) => (
+          <Card title={title} content={content} twittName={twittName} id={id} key={id} />
         ))}
       </GridTemplate>
     );
@@ -35,11 +27,10 @@ Twitts.propTypes = {
   fetchTwitts: PropTypes.func.isRequired,
   twitts: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
       twittName: PropTypes.string.isRequired,
-      created: PropTypes.string.isRequired,
     }),
   ),
 };
