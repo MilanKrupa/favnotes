@@ -15,8 +15,8 @@ class Twitts extends Component {
     const { twitts } = this.props;
     return (
       <GridTemplate pageType="twitts">
-        {twitts.map(({ title, content, twittName, _id: id }) => (
-          <Card title={title} content={content} twittName={twittName} id={id} key={id} />
+        {twitts.map(({ title, content, twittName, _id }) => (
+          <Card title={title} content={content} twittName={twittName} _id={_id} key={_id} />
         ))}
       </GridTemplate>
     );

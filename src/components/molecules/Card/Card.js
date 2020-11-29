@@ -17,9 +17,6 @@ const StyledWrapper = styled.div`
   overflow: hidden;
   display: grid;
   grid-template-rows: 0.25fr 1fr;
-  :hover {
-    cursor: pointer;
-  }
 `;
 
 const InnerWrapper = styled.div`
@@ -28,6 +25,9 @@ const InnerWrapper = styled.div`
   padding: 17px 30px;
   :first-of-type {
     z-index: 98;
+  }
+  :hover {
+    cursor: pointer;
   }
 
   ${({ flex }) =>
@@ -75,15 +75,15 @@ class Card extends Component {
   handleCardClick = () => this.setState({ redirect: true });
 
   render() {
-    const { id, pageContext, title, twittName, articleUrl, content, removeItem } = this.props;
+    const { _id, pageContext, title, twittName, articleUrl, content, removeItem } = this.props;
     const { redirect } = this.state;
 
     if (redirect) {
-      return <Redirect to={`${pageContext}/${id}`} />;
+      return <Redirect to={`${pageContext}/${_id}`} />;
     }
     return (
-      <StyledWrapper id={id} onClick={this.handleCardClick}>
-        <InnerWrapper pageContext={pageContext}>
+      <StyledWrapper _id={_id}>
+        <InnerWrapper onClick={this.handleCardClick} pageContext={pageContext}>
           <StyledHeading>{title}</StyledHeading>
           {pageContext === 'twitts' && (
             <StyledAvatar src={`https://twitter-avatar.now.sh/${twittName}`} />
@@ -94,7 +94,7 @@ class Card extends Component {
           <Paragraph>{content}</Paragraph>
           <Button
             onClick={() => {
-              removeItem(pageContext, id);
+              removeItem(pageContext, _id);
             }}
             secondary
           >
@@ -112,7 +112,7 @@ Card.propTypes = {
   twittName: PropTypes.string,
   articleUrl: PropTypes.string,
   content: PropTypes.string.isRequired,
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   removeItem: PropTypes.func.isRequired,
 };
 
@@ -123,7 +123,7 @@ Card.defaultProps = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  removeItem: (itemType, id) => dispatch(removeItemAction(itemType, id)),
+  removeItem: (itemType, _id) => dispatch(removeItemAction(itemType, _id)),
 });
 
 export default connect(null, mapDispatchToProps)(withContext(Card));
