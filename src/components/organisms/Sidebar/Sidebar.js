@@ -54,7 +54,7 @@ const Sidebar = ({ pageContext }) => (
         <ButtonIcon as={NavLink} activeclass="active" to={routes.notes} icon={Pen} />
       </li>
       <li>
-        <ButtonIcon as={NavLink} to={routes.twitts} icon={Twitter} />
+        <ButtonIcon as={NavLink} to={routes.twitters} icon={Twitter} />
       </li>
       <li>
         <ButtonIcon as={NavLink} to={routes.articles} icon={Bulb} />
@@ -65,7 +65,7 @@ const Sidebar = ({ pageContext }) => (
 );
 
 Sidebar.propTypes = {
-  pageContext: PropTypes.oneOf(['notes', 'twitts', 'articles']),
+  pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
 };
 Sidebar.defaultProps = {
   pageContext: 'notes',

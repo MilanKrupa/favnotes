@@ -82,7 +82,7 @@ const NewItemBar = (props) => {
         Create new {pageContext}
       </Heading>
       <Formik
-        initialValues={{ title: '', content: '', twittName: '', articleUrl: '' }}
+        initialValues={{ title: '', content: '', twitterName: '', articleUrl: '' }}
         onSubmit={handleSubmit}
       >
         {({ isSubmitting, handleChange, handleBlur, values }) => (
@@ -97,17 +97,17 @@ const NewItemBar = (props) => {
             />
 
             <ErrorMessage name="title">{(msg) => <ErrorInline>{msg}</ErrorInline>}</ErrorMessage>
-            {pageContext === 'twitts' && (
+            {pageContext === 'twitters' && (
               <StyledInput
                 as={Field}
                 type="text"
-                name="twittName"
+                name="twitterName"
                 autoComplete="off"
                 placeholder="Account name eg. milan_krupa"
                 validate={validateTwitt}
               />
             )}
-            <ErrorMessage name="twittName">
+            <ErrorMessage name="twitterName">
               {(msg) => <ErrorInline>{msg}</ErrorInline>}
             </ErrorMessage>
             {pageContext === 'articles' && (
@@ -142,7 +142,7 @@ const NewItemBar = (props) => {
 };
 
 NewItemBar.propTypes = {
-  pageContext: PropTypes.oneOf(['notes', 'twitts', 'articles']),
+  pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
   isVisible: PropTypes.bool.isRequired,
   addItem: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
