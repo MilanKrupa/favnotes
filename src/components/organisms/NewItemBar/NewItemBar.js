@@ -24,6 +24,7 @@ const StyledWrapper = styled.div`
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
   transform: translateX(${({ isVisible }) => (isVisible ? '0' : '100%')});
   transition: transform 0.3s ease-in-out;
+  z-index: 9998;
 `;
 
 const StyledTextArea = styled(Input)`

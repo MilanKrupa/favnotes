@@ -39,7 +39,7 @@ const StyledButtonIcon = styled(ButtonIcon)`
   background-color: ${({ activecolor, theme }) => theme[activecolor]};
   background-size: 50%;
   border-radius: 50px;
-  z-index: 100;
+  z-index: 9999;
   :hover {
     cursor: pointer;
   }

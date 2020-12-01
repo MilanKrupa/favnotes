@@ -12,6 +12,7 @@ const StyledWrapper = styled.div`
   padding-left: 100px;
   display: flex;
   flex-direction: column;
+  flex-basis: 100%;
   max-width: 600px;
 `;
 
@@ -21,7 +22,8 @@ const StyledAvatar = styled.img`
   border-radius: 50%;
   position: absolute;
   right: 0;
-  top: -20px;
+  top: -25px;
+  transform: translateX(150%);
 `;
 const StyledHeading = styled(Heading)`
   position: relative;
@@ -30,6 +32,10 @@ const StyledHeading = styled(Heading)`
 
 const StyledButton = styled(Button)`
   margin: 50px 0 20px 0;
+  line-height: 47px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: ${({ theme, bold }) => (bold ? theme.fontWeight.bold : 'bold')};
 `;
 
 const StyledLink = styled.a`
@@ -43,12 +49,12 @@ const DetailsTemplate = ({ pageContext, title, content, articleUrl, twitterName 
     <StyledWrapper>
       <StyledHeading big as="h1">
         {title}
+        {pageContext === 'twitters' && (
+          <StyledAvatar alt={title} src={`https://twitter-avatar.now.sh/${twitterName}`} />
+        )}
       </StyledHeading>
       <Paragraph>{content}</Paragraph>
       {pageContext === 'articles' && <StyledLink href={articleUrl}>Open article</StyledLink>}
-      {pageContext === 'twitters' && (
-        <StyledAvatar alt={title} src={`https://twitter-avatar.now.sh/${twitterName}`} />
-      )}
       <StyledButton as={Link} to={`/${pageContext}`} activecolor={pageContext}>
         close
       </StyledButton>

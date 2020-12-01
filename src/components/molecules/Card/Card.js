@@ -25,7 +25,7 @@ const InnerWrapper = styled.div`
   padding: 17px 30px;
   background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : 'white')};
   :first-of-type {
-    z-index: 9999;
+    z-index: 9997;
   }
   ${({ flex }) =>
     flex &&

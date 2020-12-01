@@ -45,7 +45,10 @@ class DetailsPage extends Component {
 }
 
 DetailsPage.propTypes = {
-  activeItem: PropTypes.arrayOf(PropTypes.any).isRequired,
+  activeItem: PropTypes.arrayOf(PropTypes.any),
+};
+DetailsPage.defaultProps = {
+  activeItem: PropTypes.object,
 };
 
 const mapStateToProps = (state, ownProps) => {
