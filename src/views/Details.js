@@ -3,7 +3,6 @@ import DetailsTemplate from 'templates/DetailsTemplate';
 import withContext from 'hoc/withContext';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 
 class DetailsPage extends Component {
   state = {
@@ -17,6 +16,7 @@ class DetailsPage extends Component {
 
   componentDidMount() {
     if (this.props.activeItem) {
+      console.log(this.props.activeItem);
       const [activeItem] = this.props.activeItem;
       this.setState({ activeItem });
     } else {
@@ -43,13 +43,6 @@ class DetailsPage extends Component {
     );
   }
 }
-
-DetailsPage.propTypes = {
-  activeItem: PropTypes.arrayOf(PropTypes.any),
-};
-DetailsPage.defaultProps = {
-  activeItem: PropTypes.object,
-};
 
 const mapStateToProps = (state, ownProps) => {
   if (state[ownProps.pageContext]) {
