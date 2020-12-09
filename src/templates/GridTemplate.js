@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import UserPageTemplate from 'templates/UserPageTemplate';
-import Input from 'components/atoms/Input/Input';
+import SearchInput from 'components/atoms/Input/SearchInput';
 import Heading from 'components/atoms/Heading/Heading';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
@@ -63,7 +63,7 @@ class GridTemplate extends Component {
         <UserPageTemplate>
           <StyledWrapper>
             <StyledPageHeader>
-              <Input search placeholder="search" />
+              <SearchInput placeholder="search" />
               <StyledHeading big as="h1">
                 {pageContext}
               </StyledHeading>
