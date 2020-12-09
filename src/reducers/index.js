@@ -44,7 +44,7 @@ const rootReducer = (state = initialState, action) => {
         ],
       };
     case SEARCH: {
-      return { ...state, searchValue: action.payload.value };
+      return { ...state, searchValue: action.payload.searchValue };
     }
     default:
       return state;

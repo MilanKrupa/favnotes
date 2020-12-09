@@ -2,6 +2,8 @@ import React from 'react';
 import searchIcon from 'assets/icons/search.svg';
 import Input from 'components/atoms/Input/Input';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { setSearchValue as setSearchAction } from 'actions';
 
 const StyledInput = styled(Input)`
   padding: 10px 40px;
@@ -12,7 +14,15 @@ const StyledInput = styled(Input)`
   background-repeat: no-repeat;
 `;
 
-const SearchInput = () => {
-  return <StyledInput />;
+const SearchInput = ({ setSearchValue }) => {
+  const handleChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+  return <StyledInput onChange={handleChange} />;
 };
-export default SearchInput;
+
+const mapDispatchToProps = (dispatch) => ({
+  setSearchValue: (searchValue) => dispatch(setSearchAction(searchValue)),
+});
+
+export default connect(null, mapDispatchToProps)(SearchInput);

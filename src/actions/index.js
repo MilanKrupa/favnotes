@@ -104,3 +104,9 @@ export const addItem = (itemType, itemContent) => (dispatch, getState) => {
       dispatch({ type: ADD_ITEM_FAILURE });
     });
 };
+export const setSearchValue = (searchValue) => ({
+  type: SEARCH,
+  payload: {
+    searchValue,
+  },
+});
