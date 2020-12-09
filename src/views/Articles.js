@@ -12,12 +12,15 @@ class Articles extends Component {
   }
 
   render() {
-    const { articles } = this.props;
+    const { articles, searchValue } = this.props;
+
     return (
       <GridTemplate pageType="articles">
-        {articles.map(({ title, content, _id: id }) => (
-          <Card title={title} content={content} id={id} key={id} />
-        ))}
+        {articles
+          .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+          .map(({ title, content, _id: id }) => (
+            <Card title={title} content={content} id={id} key={id} />
+          ))}
       </GridTemplate>
     );
   }
@@ -37,8 +40,8 @@ Articles.defaultProps = {
 };
 
 const mapStateToProps = (state) => {
-  const { articles } = state;
-  return { articles };
+  const { articles, searchValue } = state;
+  return { articles, searchValue };
 };
 
 const mapDispatchToProps = (dispatch) => ({

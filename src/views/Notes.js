@@ -12,13 +12,15 @@ class Notes extends Component {
   }
 
   render() {
-    const { notes } = this.props;
+    const { notes, searchValue } = this.props;
 
     return (
       <GridTemplate>
-        {notes.map(({ title, content, _id: id }) => (
-          <Card title={title} content={content} id={id} key={id} />
-        ))}
+        {notes
+          .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+          .map(({ title, content, _id: id }) => (
+            <Card title={title} content={content} id={id} key={id} />
+          ))}
       </GridTemplate>
     );
   }
@@ -38,8 +40,8 @@ Notes.defaultProps = {
 };
 
 const mapStateToProps = (state) => {
-  const { notes } = state;
-  return { notes };
+  const { notes, searchValue } = state;
+  return { notes, searchValue };
 };
 
 const mapDispatchToProps = (dispatch) => ({

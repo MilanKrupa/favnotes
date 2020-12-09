@@ -12,13 +12,15 @@ class Twitters extends Component {
   }
 
   render() {
-    const { twitters } = this.props;
+    const { twitters, searchValue } = this.props;
 
     return (
       <GridTemplate>
-        {twitters.map(({ title, content, twitterName, _id: id }) => (
-          <Card id={id} title={title} content={content} twitterName={twitterName} key={id} />
-        ))}
+        {twitters
+          .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+          .map(({ title, content, twitterName, _id: id }) => (
+            <Card id={id} title={title} content={content} twitterName={twitterName} key={id} />
+          ))}
       </GridTemplate>
     );
   }
@@ -40,8 +42,8 @@ Twitters.defaultProps = {
 };
 
 const mapStateToProps = (state) => {
-  const { twitters } = state;
-  return { twitters };
+  const { twitters, searchValue } = state;
+  return { twitters, searchValue };
 };
 
 const mapDispatchToProps = (dispatch) => ({

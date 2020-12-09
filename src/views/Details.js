@@ -16,7 +16,6 @@ class DetailsPage extends Component {
 
   componentDidMount() {
     if (this.props.activeItem) {
-      console.log(this.props.activeItem);
       const [activeItem] = this.props.activeItem;
       this.setState({ activeItem });
     } else {
