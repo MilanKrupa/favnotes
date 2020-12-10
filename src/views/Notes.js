@@ -19,7 +19,7 @@ class Notes extends Component {
         {notes
           .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
           .map(({ title, content, _id: id }) => (
-            <Card title={title} content={content} id={id} key={id} />
+            <Card title={title} content={content} id={id} key={id} searchValue={searchValue} />
           ))}
       </GridTemplate>
     );

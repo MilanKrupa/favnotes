@@ -6,6 +6,7 @@ import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Heading from 'components/atoms/Heading/Heading';
 import Button from 'components/atoms/Button/Button';
 import LinkIcon from 'assets/icons/link.svg';
+import Highlight from 'components/atoms/Highlight/Highlight';
 import { connect } from 'react-redux';
 import { removeItem as removeItemAction } from 'actions';
 import withContext from 'hoc/withContext';
@@ -72,7 +73,16 @@ class Card extends Component {
   handleCardClick = () => this.setState({ redirect: true });
 
   render() {
-    const { id, pageContext, title, twitterName, articleUrl, content, removeItem } = this.props;
+    const {
+      id,
+      pageContext,
+      title,
+      twitterName,
+      articleUrl,
+      content,
+      removeItem,
+      searchValue,
+    } = this.props;
     const { redirect } = this.state;
 
     if (redirect) {
@@ -82,7 +92,9 @@ class Card extends Component {
     return (
       <StyledWrapper>
         <InnerWrapper onClick={this.handleCardClick} activeColor={pageContext}>
-          <StyledHeading>{title}</StyledHeading>
+          <StyledHeading>
+            <Highlight text={title} highlight={searchValue} />
+          </StyledHeading>
           {pageContext === 'twitters' && (
             <StyledAvatar src={`https://twitter-avatar.now.sh/${twitterName}`} />
           )}

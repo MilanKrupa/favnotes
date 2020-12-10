@@ -19,7 +19,14 @@ class Twitters extends Component {
         {twitters
           .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
           .map(({ title, content, twitterName, _id: id }) => (
-            <Card id={id} title={title} content={content} twitterName={twitterName} key={id} />
+            <Card
+              id={id}
+              title={title}
+              content={content}
+              twitterName={twitterName}
+              key={id}
+              searchValue={searchValue}
+            />
           ))}
       </GridTemplate>
     );
