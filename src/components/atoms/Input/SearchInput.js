@@ -14,15 +14,20 @@ const StyledInput = styled(Input)`
   background-repeat: no-repeat;
 `;
 
-const SearchInput = ({ setSearchValue }) => {
+const SearchInput = ({ setSearchValue, searchValue }) => {
   const handleChange = (e) => {
     setSearchValue(e.target.value);
   };
-  return <StyledInput onChange={handleChange} />;
+  return <StyledInput onChange={handleChange} value={searchValue} />;
+};
+
+const mapStateToProps = (state) => {
+  const { searchValue } = state;
+  return { searchValue };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   setSearchValue: (searchValue) => dispatch(setSearchAction(searchValue)),
 });
 
-export default connect(null, mapDispatchToProps)(SearchInput);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchInput);
