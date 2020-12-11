@@ -9,6 +9,7 @@ import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
 import NewItemBar from 'components/organisms/NewItemBar/NewItemBar';
 import plusIcon from 'assets/icons/plus.svg';
 import withContext from 'hoc/withContext';
+import { connect } from 'react-redux';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -55,7 +56,7 @@ class GridTemplate extends Component {
   };
 
   render() {
-    const { pageContext, children } = this.props;
+    const { pageContext, children, state } = this.props;
     const { isNewItemBarVisible } = this.state;
 
     return (
@@ -67,7 +68,9 @@ class GridTemplate extends Component {
               <StyledHeading big as="h1">
                 {pageContext}
               </StyledHeading>
-              <Paragraph>6 {pageContext}</Paragraph>
+              <Paragraph>
+                {state[pageContext] ? `${state[pageContext].length} ${pageContext}` : null}
+              </Paragraph>
             </StyledPageHeader>
             <StyledGrid>{children}</StyledGrid>
             <StyledButtonIcon
@@ -96,4 +99,8 @@ GridTemplate.defaultProps = {
   pageContext: 'notes',
 };
 
-export default withContext(GridTemplate);
+const mapStateToProps = (state) => ({
+  state,
+});
+
+export default withContext(connect(mapStateToProps)(GridTemplate));
