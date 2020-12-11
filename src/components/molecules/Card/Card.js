@@ -21,13 +21,67 @@ const StyledWrapper = styled.div`
   grid-template-rows: 0.25fr 1fr;
 `;
 
+const StyledHeading = styled(Heading)`
+  margin: 5px 0 0;
+  position: relative;
+  width: fit-content;
+  ::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    background-color: black;
+    left: 0;
+    bottom: 0;
+    ${({ animate }) =>
+      animate &&
+      css`
+        animation: item-hover-off 0.3s;
+      `}
+  }
+  :hover {
+    ::after {
+    }
+  }
+  @keyframes item-hover {
+    from {
+      left: 0;
+      right: 100%;
+    }
+    to {
+      left: 0;
+      right: 0;
+    }
+  }
+  @keyframes item-hover-off {
+    from {
+      right: 0;
+      left: 0;
+    }
+    to {
+      right: 0;
+      left: 100%;
+    }
+  }
+`;
+
 const InnerWrapper = styled.div`
   position: relative;
   padding: 17px 30px;
   background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : 'white')};
+  &:hover ${StyledHeading}::after {
+    animation: item-hover 0.3s forwards;
+  }
+
   :first-of-type {
     z-index: 9997;
   }
+  ${({ redirect }) =>
+    redirect &&
+    css`
+      :hover {
+        cursor: pointer;
+      }
+    `}
   ${({ flex }) =>
     flex &&
     css`
@@ -35,10 +89,6 @@ const InnerWrapper = styled.div`
       flex-direction: column;
       justify-content: space-between;
     `}
-`;
-
-const StyledHeading = styled(Heading)`
-  margin: 5px 0 0;
 `;
 
 const StyledAvatar = styled.img`
@@ -68,9 +118,12 @@ const StyledLinkButton = styled.a`
 class Card extends Component {
   state = {
     redirect: false,
+    animate: false,
   };
 
   handleCardClick = () => this.setState({ redirect: true });
+
+  handleCardHover = () => this.setState({ animate: true });
 
   render() {
     const {
@@ -83,7 +136,7 @@ class Card extends Component {
       removeItem,
       searchValue,
     } = this.props;
-    const { redirect } = this.state;
+    const { redirect, animate } = this.state;
 
     if (redirect) {
       return <Redirect to={`${pageContext}/details/${id}`} />;
@@ -91,8 +144,13 @@ class Card extends Component {
 
     return (
       <StyledWrapper>
-        <InnerWrapper onClick={this.handleCardClick} activeColor={pageContext}>
-          <StyledHeading>
+        <InnerWrapper
+          redirect
+          onMouseOut={this.handleCardHover}
+          onClick={this.handleCardClick}
+          activeColor={pageContext}
+        >
+          <StyledHeading animate={animate}>
             <Highlight text={title} highlight={searchValue} />
           </StyledHeading>
           {pageContext === 'twitters' && (
