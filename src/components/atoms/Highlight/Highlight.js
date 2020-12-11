@@ -3,8 +3,11 @@ import styled from 'styled-components';
 
 const HighlightedSpan = styled.span`
   background-color: ${({ highlighted }) => (highlighted ? 'white' : 'transparent')};
+  :first-child {
+    text-transform: capitalize;
+  }
 `;
-const StyledSpan = styled.span``;
+
 let uniqueID = 0;
 const getID = () => {
   uniqueID += 1;
@@ -15,13 +18,19 @@ const Highligt = ({ text, highlight }) => {
   const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
 
   return (
-    <StyledSpan>
-      {parts.map((part) => (
-        <HighlightedSpan key={getID()} highlighted={part === highlight}>
-          {part}
-        </HighlightedSpan>
-      ))}
-    </StyledSpan>
+    <span>
+      {parts.map((part) => {
+        if (part)
+          return (
+            <HighlightedSpan
+              key={getID()}
+              highlighted={part.toLowerCase() === highlight.toLowerCase()}
+            >
+              {part}
+            </HighlightedSpan>
+          );
+      })}
+    </span>
   );
 };
 
