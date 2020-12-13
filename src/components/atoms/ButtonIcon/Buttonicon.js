@@ -12,9 +12,6 @@ const ButtonIcon = styled.button`
   border: none;
   outline: none;
   background-color: transparent;
-  transition: transform 0.3s, width 0.3s, height 0.3s;
-  transform: rotate(${({ active }) => (active ? '-90deg' : '0deg')});
-
   &.active {
     background-color: white;
   }

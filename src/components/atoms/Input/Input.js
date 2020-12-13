@@ -7,6 +7,12 @@ const Input = styled.input`
   background-color: ${({ theme }) => theme.grey100};
   border: none;
   border-radius: 50px;
+  outline: none;
+  transition: filter 0.2s;
+
+  :focus {
+    filter: brightness(97%);
+  }
 
   ::placeholder {
     text-transform: uppercase;

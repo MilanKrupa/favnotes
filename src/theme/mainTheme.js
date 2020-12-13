@@ -4,6 +4,7 @@ export const theme = {
   articles: 'hsl(106, 47%, 64%)',
   grey100: 'hsl(0, 0%, 96%)',
   grey200: 'hsl(0, 0%, 90%)',
+  grey300: 'hsl(0, 0%, 50%)',
   black: 'hsl(0, 0%, 0%)',
   orange: 'hsl(20, 86%, 59%)',
   fontWeight: {

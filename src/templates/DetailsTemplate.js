@@ -42,6 +42,12 @@ const StyledLink = styled.a`
   text-decoration: underline;
   font-weight: ${({ theme }) => theme.fontWeight.bold};
   color: ${({ theme }) => theme.black};
+  width: fit-content;
+  transition: color 0.15s;
+  &:hover {
+    color: ${({ theme }) => theme.grey300};
+    cursor: pointer;
+  }
 `;
 
 const DetailsTemplate = ({ pageContext, title, content, articleUrl }) => (

@@ -14,12 +14,14 @@ const Button = styled.button`
   outline: none;
   :hover {
     cursor: pointer;
+    filter: brightness(103%);
   }
+  transition: filter 0.2s;
 
   ${({ secondary }) =>
     secondary &&
     css`
-      background-color: #e6e6e6;
+      background-color: ${({ theme }) => theme.grey200};
       width: 105px;
       height: 30px;
       font-size: 10px;

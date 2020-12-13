@@ -10,12 +10,13 @@ import { addItem as addItemAction } from 'actions';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 const StyledWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 0;
   z-index: 99;
   height: 100vh;
   width: 680px;
+  overflow-y: auto;
   border-left: 8px solid ${({ theme, activecolor }) => theme[activecolor]};
   display: flex;
   flex-direction: column;

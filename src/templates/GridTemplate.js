@@ -41,8 +41,11 @@ const StyledButtonIcon = styled(ButtonIcon)`
   background-size: 50%;
   border-radius: 50px;
   z-index: 9999;
+  transition: transform 0.3s, filter 0.2s;
+  transform: rotate(${({ active }) => (active ? '-90deg' : '0deg')});
   :hover {
     cursor: pointer;
+    filter: brightness(103%);
   }
 `;
 
