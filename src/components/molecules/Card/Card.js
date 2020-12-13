@@ -118,12 +118,12 @@ const StyledLinkButton = styled.a`
 class Card extends Component {
   state = {
     redirect: false,
-    animate: false,
+    animateCardHover: false,
   };
 
   handleCardClick = () => this.setState({ redirect: true });
 
-  handleCardHover = () => this.setState({ animate: true });
+  handleCardHover = () => this.setState({ animateCardHover: true });
 
   render() {
     const {
@@ -136,7 +136,7 @@ class Card extends Component {
       removeItem,
       searchValue,
     } = this.props;
-    const { redirect, animate } = this.state;
+    const { redirect, animateCardHover } = this.state;
 
     if (redirect) {
       return <Redirect to={`${pageContext}/details/${id}`} />;
@@ -150,7 +150,7 @@ class Card extends Component {
           onClick={this.handleCardClick}
           activeColor={pageContext}
         >
-          <StyledHeading animate={animate}>
+          <StyledHeading animate={animateCardHover}>
             <Highlight text={title} highlight={searchValue} />
           </StyledHeading>
           {pageContext === 'twitters' && (
