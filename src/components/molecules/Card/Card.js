@@ -126,16 +126,7 @@ class Card extends Component {
   handleCardHover = () => this.setState({ animateCardHover: true });
 
   render() {
-    const {
-      id,
-      pageContext,
-      title,
-      twitterName,
-      articleUrl,
-      content,
-      removeItem,
-      searchValue,
-    } = this.props;
+    const { id, pageContext, title, articleUrl, content, removeItem, searchValue } = this.props;
     const { redirect, animateCardHover } = this.state;
 
     if (redirect) {
@@ -154,7 +145,8 @@ class Card extends Component {
             <Highlight text={title} highlight={searchValue} />
           </StyledHeading>
           {pageContext === 'twitters' && (
-            <StyledAvatar src={`https://twitter-avatar.now.sh/${twitterName}`} />
+            // <StyledAvatar src={`https://twitter-avatar.now.sh/${twitterName}`} />
+            <StyledAvatar src="https://cdn.pixabay.com/photo/2018/11/13/21/43/instagram-3814049_960_720.png" />
           )}
           {pageContext === 'articles' && <StyledLinkButton href={articleUrl} />}
         </InnerWrapper>
@@ -173,7 +165,7 @@ Card.propTypes = {
   id: PropTypes.string.isRequired,
   pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
   title: PropTypes.string.isRequired,
-  twitterName: PropTypes.string,
+  // twitterName: PropTypes.string,
   articleUrl: PropTypes.string,
   content: PropTypes.string.isRequired,
   removeItem: PropTypes.func.isRequired,
@@ -181,7 +173,7 @@ Card.propTypes = {
 
 Card.defaultProps = {
   pageContext: 'notes',
-  twitterName: null,
+  // twitterName: null,
   articleUrl: null,
 };
 

@@ -44,13 +44,16 @@ const StyledLink = styled.a`
   color: ${({ theme }) => theme.black};
 `;
 
-const DetailsTemplate = ({ pageContext, title, content, articleUrl, twitterName }) => (
+const DetailsTemplate = ({ pageContext, title, content, articleUrl }) => (
   <UserPageTemplate>
     <StyledWrapper>
       <StyledHeading big as="h1">
         {title}
         {pageContext === 'twitters' && (
-          <StyledAvatar alt={title} src={`https://twitter-avatar.now.sh/${twitterName}`} />
+          <StyledAvatar
+            alt={title}
+            src="https://cdn.pixabay.com/photo/2018/11/13/21/43/instagram-3814049_960_720.png"
+          />
         )}
       </StyledHeading>
       <Paragraph>{content}</Paragraph>
