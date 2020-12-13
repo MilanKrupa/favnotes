@@ -18,6 +18,8 @@ export const FETCH_FAILURE = 'FETCH_FAILURE';
 
 export const SEARCH = 'SEARCH';
 
+export const LOG_OUT = 'LOG_OUT';
+
 export const authenticate = (username, password) => (dispatch) => {
   dispatch({ type: AUTH_REQUEST });
 
@@ -109,4 +111,8 @@ export const setSearchValue = (searchValue) => ({
   payload: {
     searchValue,
   },
+});
+
+export const logOut = () => ({
+  type: LOG_OUT,
 });

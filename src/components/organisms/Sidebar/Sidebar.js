@@ -10,6 +10,8 @@ import Logout from 'assets/icons/logout.svg';
 import Logo from 'assets/icons/logo.svg';
 import { routes } from 'routes/routes';
 import withContext from 'hoc/withContext';
+import { connect } from 'react-redux';
+import { logOut as logOutAction } from 'actions';
 
 const StyledWrapper = styled.aside`
   background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : theme.notes)};
@@ -46,23 +48,28 @@ const LinksList = styled.ul`
   list-style: none;
 `;
 
-const Sidebar = ({ pageContext }) => (
-  <StyledWrapper activeColor={pageContext}>
-    <StyledLogo to="/" />
-    <LinksList>
-      <li>
-        <ButtonIcon as={NavLink} activeclass="active" to={routes.notes} icon={Pen} />
-      </li>
-      <li>
-        <ButtonIcon as={NavLink} to={routes.twitters} icon={Twitter} />
-      </li>
-      <li>
-        <ButtonIcon as={NavLink} to={routes.articles} icon={Bulb} />
-      </li>
-    </LinksList>
-    <StyledButtonIcon as={NavLink} to={routes.login} icon={Logout} />
-  </StyledWrapper>
-);
+const Sidebar = ({ pageContext, logOut }) => {
+  const handleLogOut = () => {
+    logOut();
+  };
+  return (
+    <StyledWrapper activeColor={pageContext}>
+      <StyledLogo to="/" />
+      <LinksList>
+        <li>
+          <ButtonIcon as={NavLink} activeclass="active" to={routes.notes} icon={Pen} />
+        </li>
+        <li>
+          <ButtonIcon as={NavLink} to={routes.twitters} icon={Twitter} />
+        </li>
+        <li>
+          <ButtonIcon as={NavLink} to={routes.articles} icon={Bulb} />
+        </li>
+      </LinksList>
+      <StyledButtonIcon as={NavLink} to={routes.login} icon={Logout} onClick={handleLogOut} />
+    </StyledWrapper>
+  );
+};
 
 Sidebar.propTypes = {
   pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
@@ -71,4 +78,8 @@ Sidebar.defaultProps = {
   pageContext: 'notes',
 };
 
-export default withContext(Sidebar);
+const mapDispatchToProps = (dispatch) => ({
+  logOut: () => dispatch(logOutAction()),
+});
+
+export default withContext(connect(null, mapDispatchToProps)(Sidebar));

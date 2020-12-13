@@ -5,6 +5,7 @@ import {
   FETCH_REQUEST,
   FETCH_SUCCESS,
   SEARCH,
+  LOG_OUT,
 } from 'actions';
 
 const initialState = {
@@ -45,6 +46,9 @@ const rootReducer = (state = initialState, action) => {
       };
     case SEARCH: {
       return { ...state, searchValue: action.payload.searchValue };
+    }
+    case LOG_OUT: {
+      return { ...state, userID: '' };
     }
     default:
       return state;
