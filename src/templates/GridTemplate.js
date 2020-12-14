@@ -6,7 +6,7 @@ import SearchInput from 'components/atoms/Input/SearchInput';
 import Heading from 'components/atoms/Heading/Heading';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
-import Alert from 'components/atoms/Alert/Alert';
+import Alert from 'components/molecules/Alert/Alert';
 import NewItemBar from 'components/organisms/NewItemBar/NewItemBar';
 import plusIcon from 'assets/icons/plus.svg';
 import withContext from 'hoc/withContext';
@@ -77,7 +77,7 @@ class GridTemplate extends Component {
                       _id={item._id}
                       alertType={item.alertType}
                       actionType={item.actionType}
-                      delay={1000}
+                      delay={2000}
                     />
                   ))
                 : null}
