@@ -86,7 +86,11 @@ class GridTemplate extends Component {
                 {pageContext}
               </StyledHeading>
               <Paragraph>
-                {state[pageContext] ? `${state[pageContext].length} ${pageContext}` : null}
+                {state[pageContext]
+                  ? `${state[pageContext].length} ${
+                      state[pageContext].length !== 1 ? pageContext : pageContext.slice(0, -1)
+                    }`
+                  : null}
               </Paragraph>
             </StyledPageHeader>
             <StyledGrid>{children}</StyledGrid>

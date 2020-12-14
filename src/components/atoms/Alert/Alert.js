@@ -24,7 +24,7 @@ const Alert = (props) => {
 
   return visible ? (
     <StyledWrapper>
-      <div>{alertType}</div>
+      <div>{alertType.slice(0, -1)}</div>
     </StyledWrapper>
   ) : null;
 };

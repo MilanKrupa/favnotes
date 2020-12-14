@@ -134,7 +134,7 @@ const NewItemBar = (props) => {
               value={values.content}
             />
             <Button type="submit" disabled={isSubmitting} activecolor={pageContext}>
-              Add {pageContext}
+              Add {pageContext.slice(0, -1)}
             </Button>
           </StyledForm>
         )}
