@@ -6,6 +6,7 @@ import SearchInput from 'components/atoms/Input/SearchInput';
 import Heading from 'components/atoms/Heading/Heading';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
+import Alert from 'components/atoms/Alert/Alert';
 import NewItemBar from 'components/organisms/NewItemBar/NewItemBar';
 import plusIcon from 'assets/icons/plus.svg';
 import withContext from 'hoc/withContext';
@@ -65,12 +66,23 @@ class GridTemplate extends Component {
   render() {
     const { pageContext, children, state } = this.props;
     const { isNewItemBarVisible, isButtonIconActive } = this.state;
-
+    console.log(state.alerts);
     return (
       <>
         <UserPageTemplate>
           <StyledWrapper>
             <StyledPageHeader>
+              {state.alerts.length
+                ? state.alerts.map((item) => (
+                    <Alert
+                      key={item._id}
+                      _id={item._id}
+                      alertType={item.alertType}
+                      actionType={item.actionType}
+                      delay={1000}
+                    />
+                  ))
+                : null}
               <SearchInput placeholder="search" />
               <StyledHeading big as="h1">
                 {pageContext}

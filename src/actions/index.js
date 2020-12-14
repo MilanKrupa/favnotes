@@ -20,6 +20,8 @@ export const SEARCH = 'SEARCH';
 
 export const LOG_OUT = 'LOG_OUT';
 
+export const REMOVE_ALERT = 'REMOVE_ALERT';
+
 export const authenticate = (username, password) => (dispatch) => {
   dispatch({ type: AUTH_REQUEST });
 
@@ -115,4 +117,11 @@ export const setSearchValue = (searchValue) => ({
 
 export const logOut = () => ({
   type: LOG_OUT,
+});
+
+export const removeAlert = (id) => ({
+  type: REMOVE_ALERT,
+  payload: {
+    id,
+  },
 });
