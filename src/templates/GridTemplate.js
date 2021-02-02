@@ -64,7 +64,6 @@ class GridTemplate extends Component {
   render() {
     const { pageContext, children, state } = this.props;
     const { isNewItemBarVisible } = this.state;
-    console.log(state.alerts);
     return (
       <>
         <UserPageTemplate>

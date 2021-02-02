@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from 'components/atoms/Input/Input';
+import Textarea from 'components/atoms/Textarea/Textarea';
 import Button from 'components/atoms/Button/Button';
 import Heading from 'components/atoms/Heading/Heading';
 import ErrorInline from 'components/atoms/ErrorInline/ErrorInline';
@@ -28,14 +29,14 @@ const StyledWrapper = styled.div`
   z-index: 9998;
 `;
 
-const StyledTextArea = styled(Input)`
-  border-radius: 20px;
-  height: 30vh;
-  margin: 30px 0 100px;
-`;
 const StyledInput = styled(Input)`
   margin-top: 30px;
 `;
+
+const StyledButton = styled(Button)`
+  margin-top: 50px;
+`;
+
 const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
@@ -75,6 +76,13 @@ const NewItemBar = (props) => {
       error = 'Required. You can use notes instead';
     } else if (!/^(ftp|http|https):\/\/[^ "]+$/.test(value)) {
       error = 'Invalid URL';
+    }
+    return error;
+  }
+  function validateContent(value) {
+    let error;
+    if (!value) {
+      error = 'Required';
     }
     return error;
   }
@@ -125,17 +133,19 @@ const NewItemBar = (props) => {
             <ErrorMessage name="articleUrl">
               {(msg) => <ErrorInline>{msg}</ErrorInline>}
             </ErrorMessage>
-            <StyledTextArea
-              as="textarea"
+            <Field
+              as={Textarea}
               onChange={handleChange}
               onBlur={handleBlur}
               placeholder="content"
               name="content"
               value={values.content}
+              validate={validateContent}
             />
-            <Button type="submit" disabled={isSubmitting} activecolor={pageContext}>
+            <ErrorMessage name="content">{(msg) => <ErrorInline>{msg}</ErrorInline>}</ErrorMessage>
+            <StyledButton type="submit" disabled={isSubmitting} activecolor={pageContext}>
               Add {pageContext.slice(0, -1)}
-            </Button>
+            </StyledButton>
           </StyledForm>
         )}
       </Formik>
